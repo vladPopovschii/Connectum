@@ -17,7 +17,7 @@ db.once('open', () => console.log("Connected to Database"))
 
 app.set('view engine', 'ejs')
 
-app.use(express.urlencoded({ extended: false, limit: '5mb' }))
+app.use(express.urlencoded({ extended: false }))
 app.use(express.static('public'))
 
 const loginRouter = require('./routes/login')

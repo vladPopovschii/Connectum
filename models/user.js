@@ -27,6 +27,8 @@ const userSchema = new mongoose.Schema({
     },
     profileImage: {
         type: String,
-        default: 'default'
+        default: 'default.png'
     }
 })
+
+module.exports = mongoose.model('User', userSchema)

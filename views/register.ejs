@@ -9,6 +9,7 @@
 <body class="register-bg">
     <div class="container-horizontal">
         <form action="/register" method="POST" class="form-double" enctype="multipart/form-data">
+        <!-- <form action="/register" method="POST" class="form-double"> -->
             <div class="form">
                 <h3 class="form-header">Register</h3>
                 <div class="form-field">
@@ -45,17 +46,13 @@
             </div>
         <div class="form">
             <div class="form-info">Already have an account?<a href="/login" class="hover-effect">Login!</a></div>
-            <div class="form-field">
+            <div class="form-field form-date-field">
                 <label for="input-date">Birth Day</label>
-                <div id="input-date" class="form-date-field">
-                    <input type="number" placeholder="mm" name="month" required>
-                    <input type="number" placeholder="dd"name="day" required>
-                    <input type="number" placeholder="yyyy" name="year" required>
-                </div>
-                </div>
-                <input type="file" name="profile-image" id="file-input">
-                <label for="file-input" class="form-image-input">Browse Files</label>
-                <button class="form-submit">Register</button>
+                <input type="date" name="date" id="input-date" required>
+            </div>
+            <input type="file" name="profile_image" id="file-input">
+            <label for="file-input" class="form-image-input">Browse Files</label>
+            <button class="form-submit">Register</button>
             </div>
         </form>
     </div>  
