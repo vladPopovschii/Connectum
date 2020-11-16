@@ -9,28 +9,29 @@
 <body class="register-bg">
     <div class="container-horizontal">
         <form action="/register" method="POST" class="form-double" enctype="multipart/form-data">
-        <!-- <form action="/register" method="POST" class="form-double"> -->
             <div class="form">
                 <h3 class="form-header">Register</h3>
                 <div class="form-field">
                     <label for="fname">First Name</label>
-                    <input type="name" id="fname" name="fname" placeholder="First Name" required>
+                    <input type="name" id="fname" name="fname" placeholder="First Name" required value="<%= typeof firstName != 'undefined' ? firstName : '' %>">
                 </div>
                 <div class="form-field">
                     <label for="lname">Last Name</label>
-                    <input type="name" id="lname" name="lname" placeholder="Last Name" required>
+                    <input type="name" id="lname" name="lname" placeholder="Last Name" required value="<%= typeof lastName != 'undefined' ? lastName : '' %>">
                 </div>
                 <div class="form-field">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Email" required>
+                    <input type="email" id="email" name="email" placeholder="Email" required value="<%= typeof email != 'undefined' ? email : '' %>">
                 </div>
                 <div class="form-field">
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" placeholder="Password" required>
+                    <div class="msg-error"><%= typeof errorMessages != 'undefined' && typeof errorMessages.password != 'undefined' ? errorMessages.password : '' %><%=  %></div>
                 </div>
                 <div class="form-field">
                     <label for="confirm_password">Confirm Password</label>
                     <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+                    <div class="msg-error"><%= typeof errorMessages != 'undefined' && typeof errorMessages.confirmPassword != 'undefined' ? errorMessages.confirmPassword : '' %></div>
                 </div>
                 <div class="form-field form-field-radio">
                     <div>Gender: </div>
@@ -48,13 +49,22 @@
             <div class="form-info">Already have an account?<a href="/login" class="hover-effect">Login!</a></div>
             <div class="form-field form-date-field">
                 <label for="input-date">Birth Day</label>
-                <input type="date" name="date" id="input-date" required>
+                <input type="date" name="date" id="input-date" required value="<%= typeof date != 'undefined' ? date : '' %>">
             </div>
-            <input type="file" name="profile_image" id="file-input">
-            <label for="file-input" class="form-image-input">Browse Files</label>
+            <input type="file" name="profile_image" id="file-input" accept="image/png, image/jpeg">
+            <label for="file-input" class="form-image-input">Browse Files <br>Leave for default</label>
             <button class="form-submit">Register</button>
             </div>
         </form>
     </div>  
+    <script>
+        const imageInput = document.querySelector('[type=file]')
+        const imageLabel = document.querySelector('[for=file-input]')
+
+        imageInput.addEventListener('change', function() {
+            imageLabel.innerHTML = this.files.item(0).name
+        })
+        console.log(imageInput, imageLabel)
+    </script>
 </body>
 </html>

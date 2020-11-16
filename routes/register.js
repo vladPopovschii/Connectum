@@ -1,6 +1,8 @@
 const express = require('express')
 const multer = require('multer')
+const bcrypt = require('bcrypt')
 const User = require('../models/user')
+const { request } = require('express')
 const router = express.Router()
 
 const storage = multer.diskStorage({
@@ -32,7 +34,7 @@ router.get('/', (req, res) => {
     res.render("register")
 })
 
-router.post('/', upload.single('profile_image'), (req, res) => {
+router.post('/', upload.single('profile_image'), async (req, res) => {
     const firstName = req.body.fname
     const lastName = req.body.lname
     const email = req.body.email
@@ -41,14 +43,32 @@ router.post('/', upload.single('profile_image'), (req, res) => {
     const gender = req.body.gender
     const date = req.body.date
 
-    const errorMessages = []
+    const errorMessages = { aux: 'text' }
 
-    if (password.length < 8) errorMessages.push('Password must be at least 8 characters')
-    if (password !== confirmPassword) errorMessages.push('Passwords must match')
+    if (password.length < 8) errorMessages.password =  'Password must be at least 8 characters'
+    if (password !== confirmPassword) errorMessages.confirmPassword =  'Passwords must match'
 
-    // if (errorMessages.length > 0) return res.redirect('/', )
+    if (Object.keys(errorMessages).length > 1) return res.render('register', { firstName, lastName, email, gender, date, errorMessages})
 
-    
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10)
+        const imagePath = (req.file != undefined) ? req.file.path : 'public\\img\\profile-img\\default.png'        
+
+        const user = new User({
+            firstName, 
+            lastName, 
+            email,
+            password: hashedPassword, 
+            gender, 
+            birthDate: date,
+            profileImage: imagePath 
+        }).save()
+        
+    } catch (e) {
+        console.log(e)
+         return res.redirect('/register')
+    }
+
     res.redirect('/')
 })
 

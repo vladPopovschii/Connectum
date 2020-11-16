@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    lasttName: {
+    lastName: {
         type: String,
         required: true
     },
@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema({
     },
     profileImage: {
         type: String,
-        default: 'default.png'
+        default: 'public\\img\\profile-img\\default.png'
     }
 })
 

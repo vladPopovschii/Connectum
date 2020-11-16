@@ -148,4 +148,12 @@ input[type="file"] {
     align-items: center;
     justify-content: center;
     color: white;
+    text-align: center;
+    cursor: pointer;
+}
+
+.form-field .msg-error {
+    color: red;
+    font-size: .75em;
+    margin-top: 3px;
 }
