@@ -2,7 +2,6 @@ const express = require('express')
 const multer = require('multer')
 const bcrypt = require('bcrypt')
 const User = require('../models/user')
-const { request } = require('express')
 const router = express.Router()
 
 const storage = multer.diskStorage({
@@ -47,7 +46,8 @@ router.post('/', upload.single('profile_image'), async (req, res) => {
 
     if (password.length < 8) errorMessages.password =  'Password must be at least 8 characters'
     if (password !== confirmPassword) errorMessages.confirmPassword =  'Passwords must match'
-
+    if (await User.exists({ email: email }) === true) errorMessages.email = 'This email is already registered'
+    
     if (Object.keys(errorMessages).length > 1) return res.render('register', { firstName, lastName, email, gender, date, errorMessages})
 
     try {
@@ -63,7 +63,7 @@ router.post('/', upload.single('profile_image'), async (req, res) => {
             birthDate: date,
             profileImage: imagePath 
         }).save()
-        
+
     } catch (e) {
         console.log(e)
          return res.redirect('/register')

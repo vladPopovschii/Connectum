@@ -1,0 +1,23 @@
+const User = require('../models/user')
+
+async function getUserByEmail(email) {
+    try {
+        const user = await User.findOne({ email: email }).exec()
+        return user
+    } catch (error) {
+        console.log(error)
+        return null
+    }
+}
+
+async function getUserById(id) {
+    try {
+        const user = await User.findById(id).exec()
+        return user
+    } catch (error) {
+        console.log(error)
+        return null
+    }
+}
+
+module.exports = { getUserByEmail, getUserById }

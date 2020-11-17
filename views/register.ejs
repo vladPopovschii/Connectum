@@ -22,6 +22,7 @@
                 <div class="form-field">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" placeholder="Email" required value="<%= typeof email != 'undefined' ? email : '' %>">
+                    <div class="msg-error"><%= typeof errorMessages != 'undefined' && typeof errorMessages.email != 'undefined' ? errorMessages.email : '' %></div>
                 </div>
                 <div class="form-field">
                     <label for="password">Password</label>

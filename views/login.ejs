@@ -10,6 +10,9 @@
     <div class="container-horizontal right">
         <form action="/login" method="POST" class="form">
             <h3 class="form-header">Login</h3>
+            <% if (messages.error) { %>
+                <div class="msg-error"><%= messages.error %></div>
+            <% } %>
             <div class="form-info">Not have an account?<a href="/register" class="hover-effect">Register now!</a></div>
             <div class="form-field">
                 <label for="email">Email</label>

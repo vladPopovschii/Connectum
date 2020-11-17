@@ -45,6 +45,27 @@ header{
     color: white;
 }
 
+.header-nav-search {
+    display: flex;
+    align-items: center;
+}
+
+.header-nav-search button {
+    width: 35px;
+    height: 35px;
+    border: none;
+}
+
+.header-nav-search input {
+    background-color: #333;
+    border-radius: 999999px;
+    border: none;
+    color: white;
+    font-size: .7em;
+    padding: .8em 1.2em;
+    font-family: 'Raleway', sans-serif;
+}
+
 .nav-menu {
     position: fixed;
     top: 12vh;
@@ -97,3 +118,4 @@ header{
     width: 1.6em;
     height: 1.6em;
 }
+

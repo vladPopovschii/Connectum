@@ -152,8 +152,12 @@ input[type="file"] {
     cursor: pointer;
 }
 
-.form-field .msg-error {
+.msg-error {
+    margin-bottom: 1em;
     color: red;
+}
+
+.form-field .msg-error {
     font-size: .75em;
     margin-top: 3px;
 }
