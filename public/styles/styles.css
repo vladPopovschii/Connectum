@@ -2,6 +2,7 @@
 
 @import './header.css';
 @import './login-form.css';
+@import './friends.css';
 
 :root {
     font-family: 'Raleway', sans-serif;
@@ -139,4 +140,12 @@ body {
 
 .post-statistics img {
     height: 100%;
+}
+
+.page-header {
+    width: 100%;
+    font-weight: 600;
+    background-color: #fff;
+    border-radius: .35em;
+    padding: 1em 1.3em;
 }

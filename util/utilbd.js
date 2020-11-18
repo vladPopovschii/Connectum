@@ -20,4 +20,18 @@ async function getUserById(id) {
     }
 }
 
-module.exports = { getUserByEmail, getUserById }
+async function searchByName(name) {
+    try {
+        const users = await User.find({
+             '$or': [
+                 { firstName: {'$regex': name, '$options': 'i'}},
+                { lastName: {'$regex': name, '$options': 'i'}}]
+            })
+        return users
+    } catch (error) {
+        console.error(error)
+        return null
+    }
+}
+
+module.exports = { getUserByEmail, getUserById, searchByName }

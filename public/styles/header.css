@@ -33,10 +33,32 @@ header{
     cursor: pointer;
     transition: .2s ease-out;
     transform: scale(1);
+    position: relative;
 }
 
-.header-nav-btn:hover {
-    transform: scale(1.2);
+.header-nav-btn-container {
+    position: fixed;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    top: 100%;
+    padding: 1em 1.2em;
+    border-radius: .4em;
+    z-index: 9999999;
+    border: 1px solid #333;
+    opacity: 0;
+    transition: .1s ease;
+    display: none;
+}
+
+.header-nav-btn-container button {
+    background: none;
+    border: none;
+}
+
+.header-nav-btn:hover .header-nav-btn-container{
+    opacity: 1;
+    display: flex;
 }
 
 .header-nav-btn img {
@@ -99,7 +121,7 @@ header{
     background-color: #fff;
     padding: 1em;
     border-radius: .3em;
-    z-index: 99;
+    z-index: 9;
 }
 
 .friend-online {

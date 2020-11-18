@@ -52,7 +52,7 @@ router.post('/', upload.single('profile_image'), async (req, res) => {
 
     try {
         const hashedPassword = await bcrypt.hash(password, 10)
-        const imagePath = (req.file != undefined) ? req.file.path : 'public\\img\\profile-img\\default.png'        
+        const imagePath = (req.file != undefined) ? req.file.path.slice(6) : '\\img\\default.png'        
 
         const user = new User({
             firstName, 

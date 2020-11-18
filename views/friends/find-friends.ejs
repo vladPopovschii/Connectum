@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed</title>
+    <link rel="stylesheet" href="/styles/styles.css">
+    <script defer src="/scripts/script.js"></script>
+</head>
+<body>
+    <%- include ('../partials/_header.ejs') %> 
+    <%- include ('../partials/_side-navs.ejs') %> 
+    <div class="container-content">
+        <% if (users.length > 0) { %>
+            <h2 class="page-header">Results for "<%= searchField %> "</h2>
+            <div class="friends-container">
+                <% users.forEach(user => { %>
+                    <div class="friend-container">
+                        <div class="friend-container-img"><img src="<%= user.profileImage %>" alt=""></div>
+                        <div class="friend-container-info">
+                            <div class="friend-container-name"><%= user.firstName %>  <%= user.lastName %> </div>
+                            <div class="friend-container-data">3 common friends</div>
+                        </div>
+                        <button class="form-submit btn-add-friend">Add</button>
+                    </div>
+                <% }) %>
+            </div>
+        <% }  else { %> 
+            <h2 class="page-header">No results for "<%= searchField %> "</h2>
+        <% } %>    
+    </div>
+</body>
+</html>

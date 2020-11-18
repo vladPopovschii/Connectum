@@ -5,25 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feed</title>
     <link rel="stylesheet" href="styles/styles.css">
+    <script defer src="/scripts/script.js"></script>
 </head>
 <body>
-    <header class="header">
-        <div class="container-horizontal">
-            <a class="header-logo" href="#">Connectum</a>
-            <nav class="header-nav">
-                <form action="/search" class="header-nav-search" method="POST" >
-                    <button class="header-nav-btn"><img src="/src/img/search.svg" alt=""></button>
-                    <input type="text">
-                </form>
-                <div class="header-nav-btn">
-                    <img src="/src/img/bell.svg" alt="">
-                </div>
-                <div class="header-nav-btn">
-                    <img src="/src/img/gear.svg" alt="">
-                </div>
-            </nav>
-        </div>
-    </header>
+    <%- include ('partials/_header.ejs') %> 
+    <%- include ('partials/_side-navs.ejs') %>   
     <div class="container-horizontal relative h0">
         <nav class="nav-menu">
             <a href="#" class="nav-menu-link">

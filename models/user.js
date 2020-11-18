@@ -27,7 +27,10 @@ const userSchema = new mongoose.Schema({
     },
     profileImage: {
         type: String,
-        default: 'public\\img\\profile-img\\default.png'
+        default: '\\img\\default.png'
+    },
+    friendList: {
+        type: Array
     }
 })
 

@@ -1,0 +1,27 @@
+<header class="header">
+    <div class="container-horizontal">
+        <a class="header-logo" href="/">Connectum</a>
+        <nav class="header-nav">
+            <form action="/friends/search?_method=SEARCH" class="header-nav-search" method="POST" >
+                <button class="header-nav-btn"><img src="/src/img/search.svg" alt=""></button>
+                <input type="text" placeholder="Search" name="friends">
+            </form>
+            <div class="header-nav-btn" data-hidden-container>
+                <img src="/src/img/bell.svg" alt="">
+                <div class="header-nav-btn-container" data-child-hidden-container>
+                    <form action="/logout?_method=DELETE" method="POST">
+                        <button type="submit" class="hover-effect">Logout</button>
+                    </form>
+                </div>
+            </div>
+            <div class="header-nav-btn" data-hidden-container>
+                <img src="/src/img/gear.svg" alt="">
+                <div class="header-nav-btn-container" data-child-hidden-container>
+                    <form action="/logout?_method=DELETE" method="POST">
+                        <button type="submit" class="hover-effect">Logout</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
