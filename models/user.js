@@ -29,9 +29,31 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: '\\img\\default.png'
     },
-    friendList: {
-        type: Array
-    }
+    info: {
+        type: String
+    },
+    friendsList: [{
+        userId: {
+            type: String,
+            required: true
+        }
+    }],
+    sentRequest: [{
+        userId: {
+            type: String,
+            required: true
+        }
+    }],
+    friendRequest: [{
+        userId: {
+            type: String,
+            required: true,
+        },
+        requestDate: {
+            type: Date,
+            default: Date.now
+        }
+    }],
 })
 
 module.exports = mongoose.model('User', userSchema)

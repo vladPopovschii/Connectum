@@ -34,4 +34,20 @@ async function searchByName(name) {
     }
 }
 
-module.exports = { getUserByEmail, getUserById, searchByName }
+async function getAndUpdate(id, data) {
+    try {
+        await User.findByIdAndUpdate(id, {
+            firstName: data.firstName,
+            lastName: data.lastName,
+            birthDate: data.birthDate,
+            gender: data.gender,
+            info: data.info,
+            profileImage: data.profileImage
+        })
+    } catch (error) {
+        console.log(error) 
+        return null
+    }
+}
+
+module.exports = { getUserByEmail, getUserById, searchByName, getAndUpdate }

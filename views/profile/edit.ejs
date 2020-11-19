@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="/styles/styles.css">
+    <script defer src="/scripts/script.js"></script>
+</head>
+<body>
+    <%- include ('../partials/_header.ejs') %> 
+    <%- include ('../partials/_side-navs.ejs') %>   
+    <div class="container-content">
+        <h2 class="page-header">Your Profile</h2>
+        <form action="/profile/edit?_method=PUT" method="POST" enctype="multipart/form-data" class="profile-container">
+            <h6 class="col-2">Your profile image</h6>
+            <div class="profile-left">
+                <input value="<%= user.profileImage %>" type="file" name="profile_image" id="file-input" accept="image/png, image/jpeg">
+                <label for="file-input" class="form-image-input"><%= user.profileImage.split('-')[2] %></label>
+            </div>
+            <div class="profile-right">
+                <div class="profile-data profile-data-input">
+                    <div class="profile-container-row">
+                        <div class="profile-container-label">First Name: </div>
+                        <input name="fname" type="text" class="profile-container-value" value="<%= user.firstName %>" placeholder="First Name" required>
+                    </div>
+                    <div class="profile-container-row">
+                        <div class="profile-container-label">Last Name: </div>
+                        <input name="lname" type="text" class="profile-container-value" value="<%= user.lastName %>" placeholder="Last Name" required>
+                    </div>
+                    <div class="profile-container-row">
+                        <div class="profile-container-label">Birthdate: </div>
+                        <input name="date" type="date" class="profile-container-value" value="<%= user.birthDate %>" required>
+                    </div>
+                    <div class="profile-container-row">
+                        <div class="form-field form-field-radio">
+                            <div>Gender: </div>
+                            <div class="radio-btn">
+                                <input type="radio" id="male" name="gender" value="male" checked>
+                                <label for="male">Male</label>
+                            </div>
+                            <div class="radio-btn">
+                                <input type="radio" id="female" name="gender" value="female">
+                                <label for="female">Female</label>
+                            </div>
+                        </div>
+                    </div>
+                    <label for="info">Info:</label>
+                    <textarea name="info" class="profile-container-info" id="info"><%= user.info %></textarea>    
+                </div>
+                <button type="submit" class="form-submit">Submit changes</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        const imageInput = document.querySelector('[type=file]')
+        const imageLabel = document.querySelector('[for=file-input]')
+
+        imageInput.addEventListener('change', function() {
+            imageLabel.innerHTML = this.files.item(0).name
+        })
+        console.log(imageInput, imageLabel)
+    </script>
+</body>
+</html>

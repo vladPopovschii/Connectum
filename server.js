@@ -39,11 +39,13 @@ app.use(passport.session())
 
 const loginRouter = require('./routes/login')
 const registerRouter = require('./routes/register')
+const profileRouter = require('./routes/profile')
 const friendsRouter = require('./routes/friends')
 
 app.use('/login', checkNotAuthenticated, loginRouter)
 app.use('/register', checkNotAuthenticated, registerRouter)
-app.use('/friends', friendsRouter)
+app.use('/profile', checkAuthenticated, profileRouter)
+app.use('/friends', checkAuthenticated, friendsRouter)
 
 app.get('/', checkAuthenticated, (req, res) => {
     res.render("index")
