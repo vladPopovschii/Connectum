@@ -6,15 +6,11 @@
     <title>Feed</title>
     <link rel="stylesheet" href="/styles/styles.css">
     <script
-        type="text/javascript"
 		src="https://code.jquery.com/jquery-3.5.1.js"
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 		crossorigin="anonymous"></script>
-    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
-    <script>
-        var socket = io();
-    </script>
-    <script type="text/javascript" defer src="/scripts/sendRequest.js"></script>
+    <script type=”text/javascript” src=”/socket.io/socket.io.js”></script>
+    <script defer src="/scripts/sendRequest.js"></script>
 </head>
 <body>
     <%- include ('../partials/_header.ejs') %> 
@@ -34,17 +30,17 @@
                             <div class="friend-container-name"><%= user.firstName %>  <%= user.lastName %></div>
                             <div class="friend-container-data">3 common friends</div>
                         </div>
-                        <div class="send-friend-request" data-send-friend-request-form>
+                        <form class="send-friend-request" action="" method="GET" data-send-friend-request-form>
                             <input type="hidden" name="receiverId" value="<%= user.id %>" data-friend-receiver>
                             <input type="hidden" name="senderId" value="<%= thisUser.id %>" data-friend-sender>
                             <button class="form-submit btn-add-friend" data-send-friend-request-button>Add</button>
-                        </div>
+                        </form>
                     </div>
                 <% }) %>
             </div>
         <% }  else { %> 
             <h2 class="page-header">No results for "<%= searchField %> "</h2>
-        <% } %>    
+        <% } %>
     </div>
 </body>
 </html>
