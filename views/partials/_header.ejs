@@ -10,7 +10,7 @@
                 <img src="/src/img/bell.svg" alt="">
                 <div class="header-nav-btn-container" data-child-hidden-container>
                     <div class="friend-request">
-                        <% if (user.friendRequest.length > 0) { %>
+                        <% if (typeof user != undefined && user.friendRequest.length > 0) { %>
                             <% user.friendRequest.forEach(request => { %>
                                 <div class="friend-request" style="border: 1px solid #333;">
                                     <input type="hidden" name="receiverId" value="<%= user.id %>" data-friend-receiver>

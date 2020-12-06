@@ -27,16 +27,16 @@
                 <h2 class="page-header">Results for "<%= searchField %>"</h2>
             <% } %>
             <div class="friends-container">
-                <% users.forEach(user => { %>
+                <% users.forEach(users => { %>
                     <div class="friend-container">
-                        <div class="friend-container-img"><img src="<%= user.profileImage %>" alt=""></div>
+                        <div class="friend-container-img"><img src="<%= users.profileImage %>" alt=""></div>
                         <div class="friend-container-info">
-                            <div class="friend-container-name"><%= user.firstName %>  <%= user.lastName %></div>
+                            <div class="friend-container-name"><%= users.firstName %>  <%= users.lastName %></div>
                             <div class="friend-container-data">3 common friends</div>
                         </div>
                         <div class="send-friend-request" data-send-friend-request-form>
-                            <input type="hidden" name="receiverId" value="<%= user.id %>" data-friend-receiver>
-                            <input type="hidden" name="senderId" value="<%= thisUser.id %>" data-friend-sender>
+                            <input type="hidden" name="receiverId" value="<%= users.id %>" data-friend-receiver>
+                            <input type="hidden" name="senderId" value="<%= user.id %>" data-friend-sender>
                             <button class="form-submit btn-add-friend" data-send-friend-request-button>Add</button>
                         </div>
                     </div>

@@ -16,30 +16,21 @@
     <%- include ('../partials/_header.ejs') %> 
     <%- include ('../partials/_side-navs.ejs') %> 
     <div class="container-content">
-        <% if (users.length > 0) { %>
-            <% if (searchField == '') { %>
-                <h2 class="page-header">All people</h2>
-            <% } else { %>
-                <h2 class="page-header">Results for "<%= searchField %>"</h2>
-            <% } %>
+        <% if (friends.length > 0) { %>
+            <h2 class="page-header">Your friends</h2>
             <div class="friends-container">
-                <% users.forEach(user => { %>
+                <% friends.forEach(friend => { %>
                     <div class="friend-container">
-                        <div class="friend-container-img"><img src="<%= user.profileImage %>" alt=""></div>
+                        <div class="friend-container-img"><img src="<%= friend.profileImage %>" alt=""></div>
                         <div class="friend-container-info">
-                            <div class="friend-container-name"><%= user.firstName %>  <%= user.lastName %></div>
+                            <div class="friend-container-name"><%= friend.firstName %>  <%= friend.lastName %></div>
                             <div class="friend-container-data">3 common friends</div>
                         </div>
-                        <form class="send-friend-request" action="" method="GET" data-send-friend-request-form>
-                            <input type="hidden" name="receiverId" value="<%= user.id %>" data-friend-receiver>
-                            <input type="hidden" name="senderId" value="<%= thisUser.id %>" data-friend-sender>
-                            <button class="form-submit btn-add-friend" data-send-friend-request-button>Add</button>
-                        </form>
                     </div>
                 <% }) %>
             </div>
         <% }  else { %> 
-            <h2 class="page-header">No results for "<%= searchField %> "</h2>
+            <h2 class="page-header">You have no friends yet. Find some!</h2>
         <% } %>
     </div>
 </body>

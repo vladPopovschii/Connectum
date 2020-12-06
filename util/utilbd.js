@@ -53,7 +53,16 @@ async function getAndUpdate(id, data) {
 
 async function getFriends(id) {
 	try {
-		const friends = (await User.findById(id).exec()).friendsList;
+		const friendsId = (await User.findById(id).exec()).friendsList;
+		const ids = [];
+		friendsId.forEach((friendId) => {
+			ids.push(friendId.userId);
+		});
+		const friends = await User.find({
+			_id: {
+				$in: ids,
+			},
+		});
 		return friends;
 	} catch (error) {
 		console.log(error);
@@ -89,7 +98,7 @@ async function sendFriendRequest(senderId, receiverId) {
 
 async function acceptRequest(senderId, receiverId) {
 	try {
-		User.findByIdAndUpdate(senderId, {
+		await User.findByIdAndUpdate(senderId, {
 			$push: {
 				friendsList: {
 					userId: receiverId,
@@ -101,14 +110,14 @@ async function acceptRequest(senderId, receiverId) {
 				},
 			},
 		});
-		User.findByIdAndUpdate(receiverId, {
+		await User.findByIdAndUpdate(receiverId, {
 			$push: {
 				friendsList: {
 					userId: senderId,
 				},
 			},
 			$pull: {
-				sentRequest: {
+				friendRequest: {
 					userId: senderId,
 				},
 			},
@@ -119,22 +128,19 @@ async function acceptRequest(senderId, receiverId) {
 }
 
 async function rejectRequest(senderId, receiverId) {
+	console.log(senderId, receiverId);
 	try {
-		User.findByIdAndUpdate(senderId, {
+		await User.findByIdAndUpdate(senderId, {
 			$pull: {
 				sentRequest: {
-					$regex: {
-						userId: receiverId,
-					},
+					userId: receiverId,
 				},
 			},
 		});
-		User.findByIdAndUpdate(receiverId, {
+		await User.findByIdAndUpdate(receiverId, {
 			$pull: {
-				sentRequest: {
-					$regex: {
-						userId: senderId,
-					},
+				friendRequest: {
+					userId: senderId,
 				},
 			},
 		});

@@ -10,8 +10,10 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
 	const friends = await getFriends(req.user.id);
-	console.log(friends);
-	res.render("./friends/friends");
+	res.render("./friends/friends", {
+		user: req.user,
+		friends: friends,
+	});
 });
 
 router.search("/search", async (req, res) => {
@@ -21,7 +23,7 @@ router.search("/search", async (req, res) => {
 	res.render("./friends/find-friends", {
 		users: users,
 		searchField: req.body.friends,
-		thisUser: req.user,
+		user: req.user,
 	});
 });
 
