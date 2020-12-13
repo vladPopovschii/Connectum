@@ -9,14 +9,25 @@
             <div class="header-nav-btn" data-hidden-container>
                 <img src="/src/img/bell.svg" alt="">
                 <div class="header-nav-btn-container" data-child-hidden-container>
-                    <div class="friend-request">
-                        <% if (typeof user != undefined && user.friendRequest.length > 0) { %>
-                            <% user.friendRequest.forEach(request => { %>
-                                <div class="friend-request" style="border: 1px solid #333;">
+                    <div class="friend-requests">
+                        <% if (typeof user != undefined && user.friendsRequests.length > 0) { %>
+                            <% user.friendsRequests.forEach(request => { %>
+                                <div class="friend-request">
                                     <input type="hidden" name="receiverId" value="<%= user.id %>" data-friend-receiver>
-                                    <input type="hidden" name="senderId" value="<%= request.userId %>" data-friend-sender>
-                                    <button class="btn-add-friend hover-effect" data-accept-request>Accept</button>
-                                    <button class="btn-add-friend hover-effect" data-reject-request>Reject</button>
+                                    <input type="hidden" name="senderId" value="<%= request.id %>" data-friend-sender>
+                                    <div class="friend-request-info">
+                                        <div class="friend-request-image-container">
+                                            <img src="<%= request.profileImage %>" alt="">
+                                        </div>
+                                        <div class="friend-request-data">
+                                            <div><%= request.firstName %></div>
+                                            <div><%= request.lastName %></div>
+                                        </div>
+                                    </div>
+                                    <div class="friend-request-buttons">
+                                        <button class="btn-add-friend hover-effect" data-accept-request>Accept</button>
+                                        <button class="btn-add-friend hover-effect" data-reject-request>Reject</button>
+                                    </div>
                                 </div>
                             <% }) %>
                         <% } %>

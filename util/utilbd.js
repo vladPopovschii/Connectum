@@ -149,6 +149,17 @@ async function rejectRequest(senderId, receiverId) {
 	}
 }
 
+async function getFriendRequests(receiverId) {
+	const requests = (await User.findById(receiverId).exec()).friendRequest;
+	let friendRequests = [];
+	for (const request of requests) {
+		const friend = await User.findById(request.userId);
+		friend.requestDate = friend.requestDate;
+		friendRequests.push(friend);
+	}
+	return friendRequests;
+}
+
 module.exports = {
 	getUserByEmail,
 	getUserById,
@@ -158,4 +169,5 @@ module.exports = {
 	sendFriendRequest,
 	acceptRequest,
 	rejectRequest,
+	getFriendRequests,
 };

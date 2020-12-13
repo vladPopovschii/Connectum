@@ -55,12 +55,24 @@ const registerRouter = require("./routes/register");
 const profileRouter = require("./routes/profile");
 const friendsRouter = require("./routes/friends");
 
+const friendsRequestMiddleware = require("./middleware/friendsRequest");
+
 app.use("/login", checkNotAuthenticated, loginRouter);
 app.use("/register", checkNotAuthenticated, registerRouter);
-app.use("/profile", checkAuthenticated, profileRouter);
-app.use("/friends", checkAuthenticated, friendsRouter);
+app.use(
+	"/profile",
+	checkAuthenticated,
+	friendsRequestMiddleware,
+	profileRouter
+);
+app.use(
+	"/friends",
+	checkAuthenticated,
+	friendsRequestMiddleware,
+	friendsRouter
+);
 
-app.get("/", checkAuthenticated, (req, res) => {
+app.get("/", checkAuthenticated, friendsRequestMiddleware, (req, res) => {
 	res.render("index", { user: req.user });
 });
 

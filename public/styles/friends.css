@@ -54,3 +54,37 @@
 	font-size: 0.85em;
 	text-align: center;
 }
+
+.friend-request {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.friend-request-info {
+	display: flex;
+	margin-right: 4em;
+}
+
+.friend-request-image-container {
+	width: 100px;
+	height: 100px;
+	margin-right: 1em;
+}
+
+.friend-request-image-container img {
+	object-fit: cover;
+	width: 100px;
+	height: 100px;
+}
+
+.friend-request-data {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.friend-request button {
+	font-weight: 500;
+	font-size: 1.1em;
+}

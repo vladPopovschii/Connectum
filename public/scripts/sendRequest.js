@@ -7,10 +7,10 @@ document
 				url: "/friends/send-friend-request",
 				type: "POST",
 				data: {
-					senderId: button.parentElement.querySelector(
+					senderId: button.parentElement.parentElement.querySelector(
 						"[data-friend-sender]"
 					).value,
-					receiverId: button.parentElement.querySelector(
+					receiverId: button.parentElement.parentElement.querySelector(
 						"[data-friend-receiver]"
 					).value,
 				},
@@ -26,15 +26,15 @@ document.querySelectorAll("[data-accept-request]").forEach((button) => {
 			url: "/friends/accept-friend",
 			type: "POST",
 			data: {
-				senderId: button.parentElement.querySelector(
+				senderId: button.parentElement.parentElement.querySelector(
 					"[data-friend-sender]"
 				).value,
-				receiverId: button.parentElement.querySelector(
+				receiverId: button.parentElement.parentElement.querySelector(
 					"[data-friend-receiver]"
 				).value,
 			},
 		});
-		button.parentElement.remove();
+		button.parentElement.parentElement.remove();
 	});
 });
 
@@ -45,14 +45,14 @@ document.querySelectorAll("[data-reject-request]").forEach((button) => {
 			url: "/friends/reject-friend",
 			type: "POST",
 			data: {
-				senderId: button.parentElement.querySelector(
+				senderId: button.parentElement.parentElement.querySelector(
 					"[data-friend-sender]"
 				).value,
-				receiverId: button.parentElement.querySelector(
+				receiverId: button.parentElement.parentElement.querySelector(
 					"[data-friend-receiver]"
 				).value,
 			},
 		});
-		button.parentElement.remove();
+		button.parentElement.parentElement.remove();
 	});
 });
