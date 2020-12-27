@@ -6,9 +6,9 @@
                 <button class="header-nav-btn"><img src="/src/img/search.svg" alt=""></button>
                 <input type="text" placeholder="Search" name="friends">
             </form>
-            <div class="header-nav-btn" data-hidden-container>
-                <img src="/src/img/bell.svg" alt="">
-                <div class="header-nav-btn-container" data-child-hidden-container>
+            <div class="header-nav-btn <%= (user.notifications > 0) ? 'notification': '' %>" data-hidden-container data-notifications>
+                <img src="/src/img/bell.svg" alt="" data-hidden-container-img>
+                <div class="header-nav-btn-container hidden" data-child-hidden-container>
                     <div class="friend-requests">
                         <% if (typeof user != undefined && user.friendsRequests.length > 0) { %>
                             <% user.friendsRequests.forEach(request => { %>
@@ -22,6 +22,7 @@
                                         <div class="friend-request-data">
                                             <div><%= request.firstName %></div>
                                             <div><%= request.lastName %></div>
+                                            <div class="friend-request-date"><%= request.requestDate.toDateString() %></div>
                                         </div>
                                     </div>
                                     <div class="friend-request-buttons">
@@ -36,7 +37,7 @@
             </div>
             <div class="header-nav-btn" data-hidden-container>
                 <img src="/src/img/gear.svg" alt="">
-                <div class="header-nav-btn-container" data-child-hidden-container>
+                <div class="header-nav-btn-container hidden" data-child-hidden-container>
                     <form action="/logout?_method=DELETE" method="POST">
                         <button type="submit" class="hover-effect">Logout</button>
                     </form>
@@ -44,4 +45,5 @@
             </div>
         </nav>
     </div>
+    <input type="hidden" value="<%= user.id %>" id="userid">
 </header>

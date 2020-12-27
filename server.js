@@ -13,15 +13,7 @@ const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 
-io.on("connection", (socket) => {
-	console.log("A user connected");
-});
-
 const initializePassport = require("./configs/passport-config");
-const {
-	checkAuthenticated,
-	checkNotAuthenticated,
-} = require("./util/passport");
 initializePassport(passport);
 
 mongoose.connect(process.env.DATABASE_URI, {
@@ -50,12 +42,20 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+const usersConnected = [];
+require("./configs/socket/friends")(io, usersConnected);
+
 const loginRouter = require("./routes/login");
 const registerRouter = require("./routes/register");
 const profileRouter = require("./routes/profile");
 const friendsRouter = require("./routes/friends");
 
+const {
+	checkAuthenticated,
+	checkNotAuthenticated,
+} = require("./middleware/passport");
 const friendsRequestMiddleware = require("./middleware/friendsRequest");
+const { use } = require("passport");
 
 app.use("/login", checkNotAuthenticated, loginRouter);
 app.use("/register", checkNotAuthenticated, registerRouter);

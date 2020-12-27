@@ -70,13 +70,18 @@ async function getFriends(id) {
 	}
 }
 
+async function checkIfRequestSended(senderId, receiverId) {
+	const requests = (await User.findById(receiverId).exec()).friendRequest;
+	if (requests.find((request) => (request.userId = senderId)) != null) {
+		console.log("Request had been already sent!");
+		return true;
+	}
+	return false;
+}
+
 async function sendFriendRequest(senderId, receiverId) {
 	try {
-		const requests = (await User.findById(receiverId).exec()).friendRequest;
-		if (requests.find((request) => (request.userId = senderId)) != null) {
-			console.log("Request had been already sent!");
-			return;
-		}
+		if (await checkIfRequestSended(senderId, receiverId)) return;
 		User.findByIdAndUpdate(senderId, {
 			$push: {
 				sentRequest: {
@@ -89,6 +94,9 @@ async function sendFriendRequest(senderId, receiverId) {
 				friendRequest: {
 					userId: senderId,
 				},
+			},
+			$inc: {
+				notifications: 1,
 			},
 		}).exec();
 	} catch (error) {
@@ -128,7 +136,6 @@ async function acceptRequest(senderId, receiverId) {
 }
 
 async function rejectRequest(senderId, receiverId) {
-	console.log(senderId, receiverId);
 	try {
 		await User.findByIdAndUpdate(senderId, {
 			$pull: {
@@ -154,10 +161,20 @@ async function getFriendRequests(receiverId) {
 	let friendRequests = [];
 	for (const request of requests) {
 		const friend = await User.findById(request.userId);
-		friend.requestDate = friend.requestDate;
+		friend.requestDate = request.requestDate;
 		friendRequests.push(friend);
 	}
 	return friendRequests;
+}
+
+async function clearNotifications(id) {
+	try {
+		await User.findByIdAndUpdate(id, {
+			notifications: 0,
+		});
+	} catch (error) {
+		console.log(error);
+	}
 }
 
 module.exports = {
@@ -170,4 +187,6 @@ module.exports = {
 	acceptRequest,
 	rejectRequest,
 	getFriendRequests,
+	checkIfRequestSended,
+	clearNotifications,
 };

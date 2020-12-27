@@ -1,143 +1,157 @@
-header{
-    width: 100%;
-    height: 10vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    border-bottom: 1px solid #333;
-    z-index: 99;
-    background-color: #eeeeee;
+header {
+	width: 100%;
+	height: 10vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	border-bottom: 1px solid #333;
+	z-index: 99;
+	background-color: #eeeeee;
 }
 
 .header-logo {
-    font-size: 26px;
-    font-weight: 600;
-    color: #333;
-    text-decoration: none;
+	font-size: 26px;
+	font-weight: 600;
+	color: #333;
+	text-decoration: none;
 }
 
 .header-nav {
-    display: flex; 
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .header-nav-btn {
-    margin: 0 1em;
-    width: 2.3em;
-    height: 2.3em;
-    background-color: #333;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: .2s ease-out;
-    transform: scale(1);
-    position: relative;
+	margin: 0 1em;
+	width: 2.3em;
+	height: 2.3em;
+	background-color: #333;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: 0.2s ease-out;
+	transform: scale(1);
+	position: relative;
 }
 
 .header-nav-btn-container {
-    position: fixed;
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    top: 100%;
-    padding: 1em 1.2em;
-    border-radius: .4em;
-    z-index: 9999999;
-    border: 1px solid #333;
-    opacity: 0;
-    transition: .1s ease;
-    display: none;
+	position: fixed;
+	background-color: #fff;
+	display: flex;
+	flex-direction: column;
+	top: 110%;
+	padding: 1em 1.2em;
+	border-radius: 0.2em;
+	z-index: 9999999;
+	border: 1px solid #333;
+	transition: 0.1s ease;
+	opacity: 1;
+	display: flex;
 }
 
 .header-nav-btn-container button {
-    background: none;
-    border: none;
+	background: none;
+	border: none;
 }
 
-.header-nav-btn:hover .header-nav-btn-container{
-    opacity: 1;
-    display: flex;
+.hidden {
+	opacity: 0;
+	display: none;
 }
 
 .header-nav-btn img {
-    width: 1.5em;
-    height: 1.5em;
-    color: white;
+	width: 1.5em;
+	height: 1.5em;
+	color: white;
 }
 
 .header-nav-search {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .header-nav-search button {
-    width: 35px;
-    height: 35px;
-    border: none;
+	width: 35px;
+	height: 35px;
+	border: none;
 }
 
 .header-nav-search input {
-    background-color: #333;
-    border-radius: 999999px;
-    border: none;
-    color: white;
-    font-size: .7em;
-    padding: .8em 1.2em;
-    font-family: 'Raleway', sans-serif;
+	background-color: #333;
+	border-radius: 999999px;
+	border: none;
+	color: white;
+	font-size: 0.7em;
+	padding: 0.8em 1.2em;
+	font-family: "Raleway", sans-serif;
 }
 
 .nav-menu {
-    position: fixed;
-    top: 12vh;
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    padding: 1em;
-    border-radius: .3em;
-    z-index: 99;
+	position: fixed;
+	top: 12vh;
+	background-color: #fff;
+	display: flex;
+	flex-direction: column;
+	padding: 1em;
+	border-radius: 0.3em;
+	z-index: 99;
 }
 
 .nav-menu-link {
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    color: #333;
-    text-decoration: none;
-    margin: .4em 0;
-} 
+	display: flex;
+	align-items: center;
+	font-size: 16px;
+	color: #333;
+	text-decoration: none;
+	margin: 0.4em 0;
+}
 
 .nav-menu-link img {
-    width: 1.2em;
-    height: 1.2em;
-    margin-right: 0.6em;
+	width: 1.2em;
+	height: 1.2em;
+	margin-right: 0.6em;
 }
 
 .friends-online {
-    position: fixed;
-    top: 12vh;
-    right: 10vw;
-    background-color: #fff;
-    padding: 1em;
-    border-radius: .3em;
-    z-index: 9;
+	position: fixed;
+	top: 12vh;
+	right: 10vw;
+	background-color: #fff;
+	padding: 1em;
+	border-radius: 0.3em;
+	z-index: 9;
 }
 
 .friend-online {
-    display: flex;
-    align-items: center;
-    margin-top: 1em;
+	display: flex;
+	align-items: center;
+	margin-top: 1em;
 }
 
 .friend-img {
-    margin-right: .6em;
-    border-radius: 50%;
-    position: relative;
+	margin-right: 0.6em;
+	border-radius: 50%;
+	position: relative;
 }
 
 .friend-online img {
-    width: 1.6em;
-    height: 1.6em;
+	width: 1.6em;
+	height: 1.6em;
 }
 
+.notification {
+	position: relative;
+}
+
+.notification::before {
+	content: "";
+	width: 11px;
+	height: 11px;
+	background-color: red;
+	border-radius: 50%;
+	position: absolute;
+	bottom: 3%;
+	right: 3%;
+}

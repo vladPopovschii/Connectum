@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-    <link rel="stylesheet" href="/styles/styles.css">
-    <script defer src="/scripts/script.js"></script>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Feed</title>
+        <link rel="stylesheet" href="/styles/styles.css">
+        <script
+            type="text/javascript"
+            src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+            crossorigin="anonymous"></script>
+        <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io();
+        </script>
+        <script type="text/javascript" defer src="/scripts/script.js"></script>
+        <script type="text/javascript" defer src="/scripts/components.js"></script>
+        <script type="text/javascript" defer src="/scripts/sendRequest.js"></script>
+        <script type="text/javascript" defer src="/scripts/socket/friends.js"></script>
+    </head>
 <body>
     <%- include ('../partials/_header.ejs') %> 
     <%- include ('../partials/_side-navs.ejs') %>   

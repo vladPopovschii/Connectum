@@ -1,58 +1,63 @@
-document
-	.querySelectorAll("[data-send-friend-request-button]")
-	.forEach((button) => {
-		button.addEventListener("click", function (e) {
-			e.preventDefault();
-			$.ajax({
-				url: "/friends/send-friend-request",
-				type: "POST",
-				data: {
-					senderId: button.parentElement.parentElement.querySelector(
-						"[data-friend-sender]"
-					).value,
-					receiverId: button.parentElement.parentElement.querySelector(
-						"[data-friend-receiver]"
-					).value,
-				},
-			});
-			button.innerHTML = "Request sent";
-		});
+function sendRequest(e) {
+	e.preventDefault();
+	const senderId = e.target.parentElement.parentElement.querySelector(
+		"[data-friend-sender]"
+	).value;
+	const receiverId = e.target.parentElement.parentElement.querySelector(
+		"[data-friend-receiver]"
+	).value;
+	$.ajax({
+		url: "/friends/send-friend-request",
+		type: "POST",
+		data: {
+			senderId: senderId,
+			receiverId: receiverId,
+		},
 	});
+	e.target.innerHTML = "Request sent";
+	socket.emit("friend-request-sent", receiverId, senderId);
+}
 
-document.querySelectorAll("[data-accept-request]").forEach((button) => {
-	button.addEventListener("click", function (e) {
-		e.preventDefault();
-		$.ajax({
-			url: "/friends/accept-friend",
-			type: "POST",
-			data: {
-				senderId: button.parentElement.parentElement.querySelector(
-					"[data-friend-sender]"
-				).value,
-				receiverId: button.parentElement.parentElement.querySelector(
-					"[data-friend-receiver]"
-				).value,
-			},
-		});
-		button.parentElement.parentElement.remove();
-	});
-});
+addGlobalEventListener(
+	"click",
+	"[data-send-friend-request-button]",
+	sendRequest
+);
 
-document.querySelectorAll("[data-reject-request]").forEach((button) => {
-	button.addEventListener("click", function (e) {
-		e.preventDefault();
-		$.ajax({
-			url: "/friends/reject-friend",
-			type: "POST",
-			data: {
-				senderId: button.parentElement.parentElement.querySelector(
-					"[data-friend-sender]"
-				).value,
-				receiverId: button.parentElement.parentElement.querySelector(
-					"[data-friend-receiver]"
-				).value,
-			},
-		});
-		button.parentElement.parentElement.remove();
+function acceptRequest(e) {
+	e.preventDefault();
+	$.ajax({
+		url: "/friends/accept-friend",
+		type: "POST",
+		data: {
+			senderId: e.target.parentElement.parentElement.querySelector(
+				"[data-friend-sender]"
+			).value,
+			receiverId: e.target.parentElement.parentElement.querySelector(
+				"[data-friend-receiver]"
+			).value,
+		},
 	});
-});
+	e.target.parentElement.parentElement.remove();
+}
+
+addGlobalEventListener("click", "[data-accept-request]", acceptRequest);
+
+function rejectRequest(e) {
+	e.preventDefault();
+	$.ajax({
+		url: "/friends/reject-friend",
+		type: "POST",
+		data: {
+			senderId: e.target.parentElement.parentElement.querySelector(
+				"[data-friend-sender]"
+			).value,
+			receiverId: e.target.parentElement.parentElement.querySelector(
+				"[data-friend-receiver]"
+			).value,
+		},
+	});
+	e.target.parentElement.parentElement.remove();
+}
+
+addGlobalEventListener("click", "[data-reject-request]", rejectRequest);
