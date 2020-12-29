@@ -4,6 +4,7 @@
 @import "./login-form.css";
 @import "./friends.css";
 @import "./profile.css";
+@import "./messages.css";
 
 :root {
 	font-family: "Raleway", sans-serif;
@@ -180,4 +181,15 @@ textarea:focus {
 
 .send-friend-request button {
 	width: 100%;
+}
+
+.white-card {
+	background-color: #fff;
+	padding: 1em;
+	border-radius: 0.3em;
+	width: 100%;
+}
+
+.no-scroll {
+	overflow: hidden;
 }

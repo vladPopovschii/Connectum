@@ -49,13 +49,13 @@ const loginRouter = require("./routes/login");
 const registerRouter = require("./routes/register");
 const profileRouter = require("./routes/profile");
 const friendsRouter = require("./routes/friends");
+const messagesRouter = require("./routes/messages");
 
 const {
 	checkAuthenticated,
 	checkNotAuthenticated,
 } = require("./middleware/passport");
 const friendsRequestMiddleware = require("./middleware/friendsRequest");
-const { use } = require("passport");
 
 app.use("/login", checkNotAuthenticated, loginRouter);
 app.use("/register", checkNotAuthenticated, registerRouter);
@@ -70,6 +70,12 @@ app.use(
 	checkAuthenticated,
 	friendsRequestMiddleware,
 	friendsRouter
+);
+app.use(
+	"/messages",
+	checkAuthenticated,
+	friendsRequestMiddleware,
+	messagesRouter
 );
 
 app.get("/", checkAuthenticated, friendsRequestMiddleware, (req, res) => {

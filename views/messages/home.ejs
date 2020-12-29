@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Friends</title>
+        <title>Messages</title>
         <link rel="stylesheet" href="/styles/styles.css">
         <script
             type="text/javascript"
@@ -23,22 +23,32 @@
     <%- include ('../partials/_header.ejs') %> 
     <%- include ('../partials/_side-navs.ejs') %> 
     <div class="container-content">
-        <% if (friends.length > 0) { %>
-            <h2 class="page-header">Your friends</h2>
-            <div class="friends-container">
+        <div class="messages-search">
+            <img src="/src/img/search-black.svg" alt="search">
+            <input type="text" placeholder="Search">
+        </div>
+        <div class="messages-people">
+            <% if (friends.length > 0) { %>
                 <% friends.forEach(friend => { %>
-                    <div class="friend-container">
-                        <div class="friend-container-img"><img src="<%= friend.profileImage %>" alt=""></div>
-                        <div class="friend-container-info">
-                            <div class="friend-container-name"><%= friend.firstName %>  <%= friend.lastName %></div>
-                            <div class="friend-container-data">3 common friends</div>
+                    <a href="/messages/1">
+                        <div class="messages-person">
+                            <div class="messages-person-info">
+                                <div class="messages-person-img">
+                                    <img src="<%= friend.profileImage %>" alt="">
+                                </div>
+                                <div class="messages-person-data">
+                                    <div class="messages-person-name"><%= friend.firstName %> <%= friend.lastName %> </div>
+                                    <div class="messages-person-message">Hi!</div>
+                                </div>
+                            </div>
+                            <div class="messages-person-time">12:23</div>
                         </div>
-                    </div>
+                    </a>
                 <% }) %>
-            </div>
-        <% }  else { %> 
-            <h2 class="page-header">You have no friends yet. Find some!</h2>
-        <% } %>
+            <% } else { %>
+                <h2>Seeming you have no friends, find some!</h2>
+            <% }%>
+        </div>
     </div>
 </body>
 </html>
