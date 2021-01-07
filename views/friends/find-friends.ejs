@@ -31,7 +31,7 @@
             <% } %>
             <div class="friends-container">
                 <% users.forEach(users => { %>
-                    <div class="friend-container">
+                    <a class="friend-container" href="/friends/view/<%= users.id %>">
                         <div class="friend-container-img"><img src="<%= users.profileImage %>" alt=""></div>
                         <div class="friend-container-info">
                             <div class="friend-container-name"><%= users.firstName %>  <%= users.lastName %></div>
@@ -42,7 +42,7 @@
                             <input type="hidden" name="senderId" value="<%= user.id %>" data-friend-sender>
                             <button class="form-submit btn-add-friend" data-send-friend-request-button>Add</button>
                         </div>
-                    </div>
+                    </a>
                 <% }) %>
             </div>
         <% }  else { %> 

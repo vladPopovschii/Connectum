@@ -55,7 +55,7 @@ class FriendOnline {
 		const html = `
 		<div class="friend-online">
 			<input type="hidden" value=${this.id}>
-            <div class="friend-img online"><img src="${this.profileImage}" alt=""></div>${this.firstName} ${this.lastName}
+            <div class="friend-img online"><img src="${this.profileImage}" alt=""></div><a class="hover-effect" href="/friends/view/${this.id}">${this.firstName} ${this.lastName}</a>
 		</div>
 		`;
 		document

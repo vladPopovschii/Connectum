@@ -25,11 +25,11 @@
     <div class="container-content">
         <div class="chat-person-header white-card">
             <div class="chat-person-img">
-                <img src="/src/img/profile.svg" alt="">
+                <img src="<%= friend.profileImage %>" alt="">
             </div>
             <div class="chat-person-info">
-                <div class="chat-person-name">Firstname Lastname</div>
-                <div class="chat-person-online">last seen 10 mins ago </div>
+                <div class="chat-person-name"><%= friend.firstName %> <%= friend.lastName %></div>
+                <div class="chat-person-online"><%= friend.lastSeen %></div>
             </div>
         </div>
         <div class="white-card chat-container">
@@ -54,6 +54,7 @@
             <input type="text" placeholder="Your message">
             <button><img src="/src/img/send.svg" alt=""></button>
         </div>
+        <input type="hidden" value="<%= friend.id %>" id="friendid">
     </div>
 </body>
 </html>

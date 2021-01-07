@@ -22,7 +22,14 @@ socket.on("online", (user) => {
 });
 
 socket.on("offline", (id) => {
-	if (id != null) removeOnlineFriend(id.userId);
+	if (id != null) {
+		removeOnlineFriend(id.userId);
+
+		const container = document.querySelector(".chat-person-online");
+		const friendId = document.querySelector("#friendid");
+		if (friendId != null && friendId.value === id.userId)
+			container.innerText = "last seen 1 min ago";
+	}
 });
 
 function addFriendRequest(user) {
@@ -38,6 +45,7 @@ function friendsFilter(id, users) {
 
 function addOnlineFriend(id, user) {
 	checkIfIsFriend(id, user);
+	addOnlineInChat();
 }
 
 function removeOnlineFriend(id) {
@@ -48,11 +56,21 @@ function removeOnlineFriend(id) {
 }
 
 function checkIfIsFriend(id, user) {
+	const friendId = document.querySelector("#friendid");
 	user.friendsList.forEach((friend) => {
 		if (friend.userId === id) {
 			const friendOnline = new FriendOnline(user);
 			friendOnline.createContainer();
+
+			if (friendId != null && friendId.value === user._id)
+				addOnlineInChat();
 			return;
 		}
 	});
+}
+
+function addOnlineInChat() {
+	const container = document.querySelector(".chat-person-online");
+	if (container == null) return;
+	container.innerText = "Online";
 }

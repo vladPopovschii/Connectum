@@ -27,13 +27,13 @@
             <h2 class="page-header">Your friends</h2>
             <div class="friends-container">
                 <% friends.forEach(friend => { %>
-                    <div class="friend-container">
+                    <a class="friend-container" href="friends/view/<%= friend.id %>">
                         <div class="friend-container-img"><img src="<%= friend.profileImage %>" alt=""></div>
                         <div class="friend-container-info">
                             <div class="friend-container-name"><%= friend.firstName %>  <%= friend.lastName %></div>
                             <div class="friend-container-data">3 common friends</div>
                         </div>
-                    </div>
+                    </a>
                 <% }) %>
             </div>
         <% }  else { %> 

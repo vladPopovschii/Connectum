@@ -30,7 +30,7 @@
         <div class="messages-people">
             <% if (friends.length > 0) { %>
                 <% friends.forEach(friend => { %>
-                    <a href="/messages/1">
+                    <a href="/messages/<%= friend.id %>">
                         <div class="messages-person">
                             <div class="messages-person-info">
                                 <div class="messages-person-img">

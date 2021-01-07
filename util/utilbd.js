@@ -188,6 +188,16 @@ async function getUsersById(ids) {
 	}
 }
 
+async function updateLastSeen(id) {
+	try {
+		await User.findByIdAndUpdate(id, {
+			lastSeen: Date.now(),
+		});
+	} catch (error) {
+		console.error(error);
+	}
+}
+
 module.exports = {
 	getUserByEmail,
 	getUserById,
@@ -201,4 +211,5 @@ module.exports = {
 	getFriendRequests,
 	checkIfRequestSended,
 	clearNotifications,
+	updateLastSeen,
 };

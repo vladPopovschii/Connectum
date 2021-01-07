@@ -5,6 +5,7 @@ const {
 	sendFriendRequest,
 	acceptRequest,
 	rejectRequest,
+	getUserById,
 } = require("../util/utilbd");
 const router = express.Router();
 
@@ -13,6 +14,14 @@ router.get("/", async (req, res) => {
 	res.render("./friends/friends", {
 		user: req.user,
 		friends: friends,
+	});
+});
+
+router.get("/view/:id", async (req, res) => {
+	const friend = await getUserById(req.params.id);
+	res.render("./friends/view", {
+		user: req.user,
+		friend: friend,
 	});
 });
 

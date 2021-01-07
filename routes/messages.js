@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { getFriends } = require("../util/utilbd");
+const { getFriends, getUserById } = require("../util/utilbd");
 
 router.get("/", async (req, res) => {
 	const friends = await getFriends(req.user.id);
@@ -11,9 +11,11 @@ router.get("/", async (req, res) => {
 	});
 });
 
-router.get("/1", (req, res) => {
+router.get("/:id", async (req, res) => {
+	const friend = await getUserById(req.params.id);
 	res.render("./messages/chat", {
 		user: req.user,
+		friend: friend,
 	});
 });
 

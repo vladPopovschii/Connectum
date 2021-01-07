@@ -3,11 +3,12 @@ const {
 	getUsersById,
 	checkIfRequestSended,
 	clearNotifications,
+	updateLastSeen,
 } = require("../../util/utilbd");
 
 module.exports = function (io) {
 	const users = [];
-	const onlineIds = [];
+	let onlineIds = [];
 
 	io.on("connection", (socket) => {
 		socket.on("userid", async (userId) => {
@@ -37,14 +38,11 @@ module.exports = function (io) {
 		});
 
 		socket.on("disconnect", () => {
-			socket.broadcast.emit(
-				"offline",
-				onlineIds.find((idObj) => idObj.socketId === socket.id)
-			);
-			console.log(
-				onlineIds.find((idObj) => idObj.socketId === socket.id),
-				onlineIds,
-				users
+			const id = onlineIds.find((idObj) => idObj.socketId === socket.id);
+			socket.broadcast.emit("offline", id);
+			if (id != null) updateLastSeen(id.userId);
+			onlineIds = onlineIds.filter(
+				(onlineId) => onlineId.socketId !== socket.id
 			);
 		});
 	});

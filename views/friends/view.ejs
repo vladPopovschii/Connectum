@@ -23,37 +23,35 @@
     <%- include ('../partials/_header.ejs') %> 
     <%- include ('../partials/_side-navs.ejs') %>   
     <div class="container-content">
-        <h2 class="page-header">Your Profile</h2>
+        <h2 class="page-header"><%= friend.firstName %> <%= friend.lastName %>'s profile</h2>
         <div class="profile-container">
-            <h6 class="col-2">Your profile image</h6>
             <div class="profile-left">
                 <div class=".friend-container-img ">
-                    <img src="<%= user.profileImage %>" alt="">
+                    <img src="<%= friend.profileImage %>" alt="">
                 </div>
             </div>
             <div class="profile-right">
                 <div class="profile-data">
                     <div class="profile-container-row">
                         <div class="profile-container-label">First Name: </div>
-                        <div class="profile-container-value"><%= user.firstName %></div>
+                        <div class="profile-container-value"><%= friend.firstName %></div>
                     </div>
                     <div class="profile-container-row">
                         <div class="profile-container-label">Last Name: </div>
-                        <div class="profile-container-value"><%= user.lastName %></div>
+                        <div class="profile-container-value"><%= friend.lastName %></div>
                     </div>
                     <div class="profile-container-row">
                         <div class="profile-container-label">Birthdate: </div>
-                        <div class="profile-container-value"><%= user.birthDate.toISOString().slice(0, 10).split('-').join('.') %></div>
+                        <div class="profile-container-value"><%= friend.birthDate.toISOString().slice(0, 10).split('-').join('.') %></div>
                     </div>
                     <div class="profile-container-row">
                         <div class="profile-container-label">Gender: </div>
-                        <div class="profile-container-value"><%= user.gender %></div>
+                        <div class="profile-container-value"><%= friend.gender %></div>
                     </div>
                     <div class="profile-container-info">
-                        <%= user.info %>
+                        <%= friend.info %> 
                     </div>
                 </div>
-                <a href="/profile/edit" class="hover-effect">Edit</a>
             </div>
         </div>
     </div>
