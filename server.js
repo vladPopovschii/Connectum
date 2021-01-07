@@ -42,8 +42,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-const usersConnected = [];
-require("./configs/socket/friends")(io, usersConnected);
+require("./configs/socket/friends")(io);
 
 const loginRouter = require("./routes/login");
 const registerRouter = require("./routes/register");

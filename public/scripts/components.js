@@ -42,3 +42,24 @@ class FriendRequest {
 			.insertAdjacentHTML("afterbegin", html);
 	}
 }
+
+class FriendOnline {
+	constructor(user) {
+		this.id = user._id;
+		this.firstName = user.firstName;
+		this.lastName = user.lastName;
+		this.profileImage = user.profileImage;
+	}
+
+	createContainer() {
+		const html = `
+		<div class="friend-online">
+			<input type="hidden" value=${this.id}>
+            <div class="friend-img online"><img src="${this.profileImage}" alt=""></div>${this.firstName} ${this.lastName}
+		</div>
+		`;
+		document
+			.querySelector("[data-friends-online]")
+			.insertAdjacentHTML("beforeend", html);
+	}
+}
