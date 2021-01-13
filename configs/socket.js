@@ -4,7 +4,7 @@ const {
 	checkIfRequestSended,
 	clearNotifications,
 	updateLastSeen,
-} = require("../../util/utilbd");
+} = require("../util/utilbd");
 
 module.exports = function (io) {
 	const users = [];
@@ -35,6 +35,20 @@ module.exports = function (io) {
 
 		socket.on("clear-notifications", (id) => {
 			clearNotifications(id);
+		});
+
+		socket.on("send-message", (friendId, senderId, msg) => {
+			console.log(friendId, senderId, msg);
+
+			socket.broadcast.to(users[friendId]).emit("receive-message", msg);
+		});
+
+		socket.on("is-typing", (friendId) => {
+			socket.broadcast.to(users[friendId]).emit("user-is-typing");
+		});
+
+		socket.on("is-not-typing", (friendId) => {
+			socket.broadcast.to(users[friendId]).emit("user-is-not-typing");
 		});
 
 		socket.on("disconnect", () => {

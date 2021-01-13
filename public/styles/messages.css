@@ -129,12 +129,14 @@
 	padding: 2em 1em;
 	display: flex;
 	flex-direction: column;
+	position: relative;
 }
 
 .chat-send-container {
 	display: flex;
 	align-items: center;
 	margin-bottom: 1.5em;
+	position: relative;
 }
 
 .chat-send-container button,
@@ -177,4 +179,12 @@
 
 .message-right .message-time {
 	margin-right: 0.3em;
+}
+
+.chat-is-typing {
+	position: absolute;
+	font-size: 14px;
+	color: #5a5a5a;
+	left: 1em;
+	top: -70%;
 }

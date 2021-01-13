@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const Room = require("../models/room");
 
 async function getUserByEmail(email) {
 	try {
@@ -196,6 +197,11 @@ async function updateLastSeen(id) {
 	} catch (error) {
 		console.error(error);
 	}
+}
+
+async function createRoom(id1, id2) {
+	try {
+	} catch (error) {}
 }
 
 module.exports = {

@@ -34,6 +34,12 @@ function formatLastSeen() {
 	const interval = (now - date) / 1000;
 
 	let finalDate;
+
+	if (interval < 60) {
+		container.innerText = `last seen 1 min ago`;
+		return;
+	}
+
 	if (interval / 60 < 60) {
 		container.innerText = `last seen ${Math.floor(interval / 60)} min ago`;
 		return;

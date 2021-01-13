@@ -42,7 +42,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-require("./configs/socket/friends")(io);
+require("./configs/socket")(io);
 
 const loginRouter = require("./routes/login");
 const registerRouter = require("./routes/register");

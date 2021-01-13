@@ -63,3 +63,22 @@ class FriendOnline {
 			.insertAdjacentHTML("beforeend", html);
 	}
 }
+
+class Message {
+	constructor(msg, time, left = false) {
+		this.msg = msg;
+		(this.time = time), (this.left = left);
+	}
+
+	createContainer() {
+		let Time = new Date(this.time);
+		Time = Time.getHours() + ":" + Time.getMinutes();
+		const html = `<div class="message ${!this.left ? "message-right" : ""}">
+			<div class="message-text">${this.msg}</div>
+			<div class="message-time">${Time}</div>
+		</div>`;
+		document
+			.querySelector("[data-chat-container]")
+			.insertAdjacentHTML("beforeend", html);
+	}
+}

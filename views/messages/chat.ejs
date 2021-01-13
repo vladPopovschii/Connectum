@@ -18,6 +18,8 @@
         <script type="text/javascript" defer src="/scripts/components.js"></script>
         <script type="text/javascript" defer src="/scripts/sendRequest.js"></script>
         <script type="text/javascript" defer src="/scripts/socket/friends.js"></script>
+        <script type="text/javascript" defer src="/scripts/socket/messages.js"></script>
+        
     </head>
 <body class="no-scroll">
     <%- include ('../partials/_header.ejs') %> 
@@ -32,27 +34,13 @@
                 <div class="chat-person-online"><%= friend.lastSeen %></div>
             </div>
         </div>
-        <div class="white-card chat-container">
-            <div class="message">
-                <div class="message-text">Hi</div>
-                <div class="message-time">20:21</div>
-            </div>
-            <div class="message">
-                <div class="message-text">How are you?</div>
-                <div class="message-time">20:21</div>
-            </div>
-            <div class="message">
-                <div class="message-text">It is a time since we had seen each other</div>
-                <div class="message-time">20:21</div>
-            </div>
-            <div class="message message-right">
-                <div class="message-text">I know</div>
-                <div class="message-time">20:21</div>
-            </div>
+        <div class="white-card chat-container" data-chat-container>
+           
         </div>
         <div class="chat-send-container white-card">
-            <input type="text" placeholder="Your message">
-            <button><img src="/src/img/send.svg" alt=""></button>
+            <div data-is-typing class="chat-is-typing hidden"><%= friend.firstName %>  is typing...</div>
+            <input data-send-message-container type="text" placeholder="Your message">
+            <button data-send-message-btn><img src="/src/img/send.svg" alt=""></button>
         </div>
         <input type="hidden" value="<%= friend.id %>" id="friendid">
     </div>
