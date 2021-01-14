@@ -185,6 +185,7 @@
 	position: absolute;
 	font-size: 14px;
 	color: #5a5a5a;
-	left: 1em;
+	left: 50%;
 	top: -70%;
+	transform: translateX(-50%);
 }

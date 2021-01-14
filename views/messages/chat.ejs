@@ -35,7 +35,14 @@
             </div>
         </div>
         <div class="white-card chat-container" data-chat-container>
-           
+            <% if (messages != null) { %>
+                <% messages.forEach(message => { %>
+                    <div class="message <%= (message.from !== friend.id) ? 'message-right' : '' %>">
+                        <div class="message-text"><%= message.body %></div>
+                        <div class="message-time"><%= `${(new Date(message.time)).toTimeString().substr(0,5)}` %> </div>
+                    </div>
+                <% }) %>
+            <% } %>
         </div>
         <div class="chat-send-container white-card">
             <div data-is-typing class="chat-is-typing hidden"><%= friend.firstName %>  is typing...</div>
@@ -43,6 +50,7 @@
             <button data-send-message-btn><img src="/src/img/send.svg" alt=""></button>
         </div>
         <input type="hidden" value="<%= friend.id %>" id="friendid">
+        <input type="hidden" value="<%= roomId %>" id="roomId">
     </div>
 </body>
 </html>

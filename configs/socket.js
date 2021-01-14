@@ -4,6 +4,7 @@ const {
 	checkIfRequestSended,
 	clearNotifications,
 	updateLastSeen,
+	insertMessageInRoom,
 } = require("../util/utilbd");
 
 module.exports = function (io) {
@@ -37,8 +38,8 @@ module.exports = function (io) {
 			clearNotifications(id);
 		});
 
-		socket.on("send-message", (friendId, senderId, msg) => {
-			console.log(friendId, senderId, msg);
+		socket.on("send-message", (friendId, senderId, msg, roomId) => {
+			insertMessageInRoom(roomId, senderId, msg);
 
 			socket.broadcast.to(users[friendId]).emit("receive-message", msg);
 		});

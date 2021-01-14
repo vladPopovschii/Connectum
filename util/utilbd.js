@@ -1,5 +1,6 @@
 const User = require("../models/user");
 const Room = require("../models/room");
+const room = require("../models/room");
 
 async function getUserByEmail(email) {
 	try {
@@ -201,7 +202,57 @@ async function updateLastSeen(id) {
 
 async function createRoom(id1, id2) {
 	try {
-	} catch (error) {}
+		const room = await new Room({
+			members: [id1, id2],
+			messages: [
+				{
+					body: "Say Hi",
+					time: new Date(),
+				},
+			],
+		}).save();
+		return room.id;
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+async function checkRoom(id1, id2) {
+	try {
+		const room = await Room.findOne({
+			members: {
+				$in: [id1, id2],
+			},
+		});
+		return room != null ? room.id : false;
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+async function insertMessageInRoom(roomId, senderId, msg) {
+	try {
+		await Room.findByIdAndUpdate(roomId, {
+			$push: {
+				messages: {
+					from: senderId,
+					body: msg,
+					time: new Date(),
+				},
+			},
+		});
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+async function getMessagesFromRoom(roomId) {
+	try {
+		const room = await Room.findById(roomId);
+		if (room != null) return room.messages;
+	} catch (error) {
+		console.error(error);
+	}
 }
 
 module.exports = {
@@ -218,4 +269,8 @@ module.exports = {
 	checkIfRequestSended,
 	clearNotifications,
 	updateLastSeen,
+	createRoom,
+	checkRoom,
+	insertMessageInRoom,
+	getMessagesFromRoom,
 };

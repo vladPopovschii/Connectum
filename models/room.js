@@ -3,17 +3,14 @@ const mongoose = require("mongoose");
 const messageSchema = new mongoose.Schema({
 	members: [
 		{
-			userId: {
-				type: String,
-				required: true,
-			},
+			type: [String],
+			required: true,
 		},
 	],
 	messages: [
 		{
 			from: {
 				type: String,
-				required: true,
 			},
 			body: {
 				type: String,

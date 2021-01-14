@@ -71,8 +71,7 @@ class Message {
 	}
 
 	createContainer() {
-		let Time = new Date(this.time);
-		Time = Time.getHours() + ":" + Time.getMinutes();
+		let Time = new Date(this.time).toTimeString().substr(0, 5);
 		const html = `<div class="message ${!this.left ? "message-right" : ""}">
 			<div class="message-text">${this.msg}</div>
 			<div class="message-time">${Time}</div>
