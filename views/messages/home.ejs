@@ -39,7 +39,10 @@
                                 </div>
                                 <div class="messages-person-data">
                                     <div class="messages-person-name"><%= friend.firstName %> <%= friend.lastName %> </div>
+                                    <% if (friend.lastMessage) { %>
                                     <div class="messages-person-message" data-last-message><%= friend.lastMessage.from === user.id ? 'You:' : `${friend.firstName}:` %> <%= friend.lastMessage.body %> </div>
+                                        
+                                    <% } %>
                                 </div>
                             </div>
                             <div class="messages-person-time" data-last-message-time><%= `${(new Date(friend.lastMessage.time)).toTimeString().substr(0,5)}` %></div>
