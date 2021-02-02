@@ -42,6 +42,9 @@ module.exports = function (io) {
 			insertMessageInRoom(roomId, senderId, msg);
 
 			socket.broadcast.to(users[friendId]).emit("receive-message", msg);
+			socket.broadcast
+				.to(users[friendId])
+				.emit("update-last-message", msg);
 		});
 
 		socket.on("is-typing", (friendId) => {

@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const flash = require("express-flash");
 const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
 const methodOverride = require("method-override");
 
 const express = require("express");
@@ -37,6 +38,7 @@ app.use(
 		secret: process.env.SESSION_SECRET,
 		resave: false,
 		saveUninitialized: false,
+		store: new MongoStore({ mongooseConnection: db }),
 	})
 );
 app.use(passport.initialize());
@@ -49,6 +51,7 @@ const registerRouter = require("./routes/register");
 const profileRouter = require("./routes/profile");
 const friendsRouter = require("./routes/friends");
 const messagesRouter = require("./routes/messages");
+const postsRouter = require("./routes/posts");
 
 const {
 	checkAuthenticated,
@@ -77,9 +80,19 @@ app.use(
 	messagesRouter
 );
 
-app.get("/", checkAuthenticated, friendsRequestMiddleware, (req, res) => {
-	res.render("index", { user: req.user });
-});
+app.use("/posts", checkAuthenticated, friendsRequestMiddleware, postsRouter);
+
+const getPostsMiddleware = require("./middleware/getPosts");
+app.get(
+	"/",
+	checkAuthenticated,
+	friendsRequestMiddleware,
+	getPostsMiddleware,
+	(req, res) => {
+		console.log(req.posts);
+		res.render("index", { user: req.user, posts: req.posts });
+	}
+);
 
 app.delete("/logout", (req, res) => {
 	req.logOut();

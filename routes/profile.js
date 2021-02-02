@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const upload = require("../util/imageUpload");
+const { upload } = require("../util/imageUpload");
 const { getAndUpdate } = require("../util/utilbd");
 
 router.get("/", (req, res) => {

@@ -18,6 +18,7 @@
         <script type="text/javascript" defer src="/scripts/components.js"></script>
         <script type="text/javascript" defer src="/scripts/sendRequest.js"></script>
         <script type="text/javascript" defer src="/scripts/socket/friends.js"></script>
+        <script type="text/javascript" defer src="/scripts/socket/home.js"></script>
     </head>
 <body>
     <%- include ('../partials/_header.ejs') %> 
@@ -38,10 +39,10 @@
                                 </div>
                                 <div class="messages-person-data">
                                     <div class="messages-person-name"><%= friend.firstName %> <%= friend.lastName %> </div>
-                                    <div class="messages-person-message">Hi!</div>
+                                    <div class="messages-person-message" data-last-message><%= friend.lastMessage.from === user.id ? 'You:' : `${friend.firstName}:` %> <%= friend.lastMessage.body %> </div>
                                 </div>
                             </div>
-                            <div class="messages-person-time">12:23</div>
+                            <div class="messages-person-time" data-last-message-time><%= `${(new Date(friend.lastMessage.time)).toTimeString().substr(0,5)}` %></div>
                         </div>
                     </a>
                 <% }) %>

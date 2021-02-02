@@ -7,10 +7,11 @@ const {
 	createRoom,
 	checkRoom,
 	getMessagesFromRoom,
+	getFriendsWithLastMessage,
 } = require("../util/utilbd");
 
 router.get("/", async (req, res) => {
-	const friends = await getFriends(req.user.id);
+	let friends = await getFriendsWithLastMessage(req.user.id);
 	res.render("./messages/home", {
 		user: req.user,
 		friends: friends,

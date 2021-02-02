@@ -18,47 +18,51 @@
     <script type="text/javascript" defer src="/scripts/components.js"></script>
     <script type="text/javascript" defer src="/scripts/sendRequest.js"></script>
     <script type="text/javascript" defer src="/scripts/socket/friends.js"></script>
+    <script type="text/javascript" defer src="/scripts/makePost.js"></script>
+
 </head>
 <body>
     <%- include ('partials/_header.ejs') %> 
     <%- include ('partials/_side-navs.ejs') %>
     <div class="container-content">
-        <div class="post">
-            <div class="post-header">
-                <div class="post-header-profile relative online"><img src="/src/img/profile.svg" alt=""></div>
-                <div class="post-header-info">
-                    <div class="post-header-info-profile-name">Name</div>
-                    <div class="post-header-info-date">Yesterday at 03:32</div>
-                </div>
-            </div>
-            <img src="/src/img/demo_post.jpg" class="post-image"></img>
-            <div class="post-statistics">
-                <form>
-                    <button type="submit"><img src="/src/img/like.svg"></img></button><div>20</div>
-                </form>
-                <form>
-                    <button type="submit"><img src="/src/img/comment.svg"></img></button><div>3</div>
-                </form>
-            </div>
+        <div class="make-post-container white-card">
+            <h2>Make Post:</h2>
+            <form method="post" action="" enctype="multipart/form-data" class="make-post-btns">
+                <button data-make-post-btn class="form-submit">Post</button>
+                <input type="file" accept="image/png, image/jpeg" name="image_Name" id="imageName">
+                <label for="imageName">Select Image</label>
+            </form>
         </div>
-        <div class="post">
-            <div class="post-header">
-                <div class="post-header-profile relative online"><img src="/src/img/profile.svg" alt=""></div>
-                <div class="post-header-info">
-                    <div class="post-header-info-profile-name">Name</div>
-                    <div class="post-header-info-date">Yesterday at 03:32</div>
+        <% posts.forEach(post => { %>
+            <div class="post">
+                <div class="post-header">
+                    <div class="post-header-profile relative online"><img src="" alt=""></div>
+                    <div class="post-header-info">
+                        <div class="post-header-info-profile-name">Name</div>
+                        <div class="post-header-info-date"><%= post.date %> </div>
+                    </div>
+                </div>
+                <img src="<%= post.imageSrc %>" class="post-image"></img>
+                <div class="post-statistics">
+                    <form>
+                        <button type="submit"><img src="/src/img/like.svg"></img></button><div>20</div>
+                    </form>
+                    <form>
+                        <button type="submit"><img src="/src/img/comment.svg"></img></button><div>3</div>
+                    </form>
                 </div>
             </div>
-            <img src="/src/img/demo_post.jpg" class="post-image"></img>
-            <div class="post-statistics">
-                <form>
-                    <button type="submit"><img src="/src/img/like.svg"></img></button><div>20</div>
-                </form>
-                <form>
-                    <button type="submit"><img src="/src/img/comment.svg"></img></button><div>3</div>
-                </form>
+        <% }) %>
+    </div>
+    <div data-wraper class="wraper none">
+        <div class="submit-post white-card">
+            <h2>Post?</h2>
+            <div class="btns">
+                <button data-btn-true class="form-submit" data-post-true>Yes</button>
+                <button data-btn-false class="form-submit" data-post-false>No</button>
             </div>
         </div>
     </div>
+    
 </body>
 </html>

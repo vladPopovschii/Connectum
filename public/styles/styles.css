@@ -193,3 +193,76 @@ textarea:focus {
 .no-scroll {
 	overflow: hidden;
 }
+
+.make-post-container {
+	margin-bottom: 1.7em;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.make-post-btns {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.make-post-container button {
+	width: 70px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+	margin-right: 2em;
+}
+
+.make-post-container label {
+	border: 1px solid #333;
+	border-radius: 59599px;
+	cursor: pointer;
+	padding: 0.5em 1.2em;
+}
+
+.wraper {
+	z-index: 999999;
+	background-color: rgba(0, 0, 0, 0.3);
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	position: fixed;
+}
+
+.submit-post {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 30vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.submit-post h2 {
+	margin-bottom: 1em;
+}
+.submit-post button {
+	width: auto;
+	margin: 1em;
+	display: inline;
+	padding: 0.6em 1.2 em;
+}
+
+.none {
+	display: none;
+}
+
+.post {
+	width: 100%;
+}
+
+.post img {
+	width: 100%;
+}

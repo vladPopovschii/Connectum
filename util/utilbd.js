@@ -1,6 +1,6 @@
 const User = require("../models/user");
 const Room = require("../models/room");
-const room = require("../models/room");
+const Post = require("../models/post");
 
 async function getUserByEmail(email) {
 	try {
@@ -220,9 +220,7 @@ async function createRoom(id1, id2) {
 async function checkRoom(id1, id2) {
 	try {
 		const room = await Room.findOne({
-			members: {
-				$in: [id1, id2],
-			},
+			$or: [{ members: [id1, id2] }, { members: [id2, id1] }],
 		});
 		return room != null ? room.id : false;
 	} catch (error) {
@@ -255,6 +253,49 @@ async function getMessagesFromRoom(roomId) {
 	}
 }
 
+async function getLastMessageFromRoom(roomId) {
+	const messages = await getMessagesFromRoom(roomId);
+	return messages[messages.length - 1];
+}
+
+async function getFriendsWithLastMessage(id) {
+	const friends = await getFriends(id);
+	for (const friend of friends) {
+		try {
+			const room = await Room.findOne({
+				$or: [
+					{ members: [id, friend.id] },
+					{ members: [friend.id, id] },
+				],
+			});
+			friend.lastMessage =
+				(await getLastMessageFromRoom(room.id)) || "Say hi!";
+		} catch (error) {
+			console.error(error);
+		}
+	}
+	friends.sort(function (a, b) {
+		return a.lastMessage.time < b.lastMessage.time ? 1 : -1;
+	});
+	return friends;
+}
+
+async function getUsersPosts(id) {
+	try {
+		let friendsIds = await User.findById(id);
+		friendsIds = friendsIds.friendsList.map((friend) => friend.userId);
+		friendsIds.push(id);
+		const posts = await Post.find({
+			ownerId: {
+				$in: friendsIds,
+			},
+		});
+		return posts;
+	} catch (error) {
+		console.error(error);
+	}
+}
+
 module.exports = {
 	getUserByEmail,
 	getUserById,
@@ -273,4 +314,6 @@ module.exports = {
 	checkRoom,
 	insertMessageInRoom,
 	getMessagesFromRoom,
+	getFriendsWithLastMessage,
+	getUsersPosts,
 };
